@@ -9,7 +9,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: process.env.NODE_ENV !== 'production' ? ['.env.development.local'] : undefined,
+      envFilePath: process.env.NODE_ENV !== 'production' 
+        ? ['.env.development.local', '.env'] // Fallback para .env se .env.development.local não existir
+        : '.env', // Carrega o .env em produção, se existir
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
