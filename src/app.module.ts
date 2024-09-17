@@ -13,16 +13,27 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         ? ['.env.development.local', '.env'] // Fallback para .env se .env.development.local não existir
         : '.env', // Carrega o .env em produção, se existir
     }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      database: process.env.DB_DATABASE,
-      host: process.env.DB_HOST,
-      password: process.env.DB_PASSWORD,
-      port: Number(process.env.DB_PORT),
-      username: process.env.DB_USERNAME,
-      entities: [`${__dirname}/**/*.entity{.js,.ts}`],
-      migrations: [`${__dirname}/migration/{.ts,*.js}`],
-      migrationsRun: true,
+    TypeOrmModule.forRootAsync({
+      useFactory: () => {
+        console.log('Database config:', {
+          host: process.env.DB_HOST,
+          username: process.env.DB_USERNAME,
+          password: process.env.DB_PASSWORD,
+          database: process.env.DB_DATABASE,
+          port: process.env.DB_PORT,
+        });
+        return {
+          type: 'postgres',
+          database: process.env.DB_DATABASE,
+          host: process.env.DB_HOST,
+          password: process.env.DB_PASSWORD,
+          port: Number(process.env.DB_PORT),
+          username: process.env.DB_USERNAME,
+          entities: [`${__dirname}/**/*.entity{.js,.ts}`],
+          migrations: [`${__dirname}/migration/{.ts,*.js}`],
+          migrationsRun: true,
+        };
+      },
     }),
     UserModule,
     AuthModule,
