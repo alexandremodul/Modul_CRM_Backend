@@ -2,7 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from './interfaces/user.entity'; 
-import { CreateUserDto } from './dtos/createUser.dto'
+import { CreateUserDto } from './dtos/createUser.dto';
+import { BadRequestException } from '@nestjs/common';
+
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
@@ -13,19 +15,27 @@ export class UserService {
     ) {}
 
   
-async createUser(userData: any) {
-    // Gerar um hash da senha antes de salvar
-    const saltRounds = 10; // Nível de segurança do salt
-    const hashedPassword = await bcrypt.hash(userData.password, saltRounds);
+    async createUser(userData: any) {
+        const saltRounds = 10; 
     
-    // Substituir a senha pela senha criptografada
-    const newUser = this.userRepository.create({
-        ...userData,
-        password: hashedPassword,
-    });
-
-    return this.userRepository.save(newUser);
-}
+        if (!this.isValidEmail(userData.email)) {
+            throw new BadRequestException('e-mail incorreto (formato)');
+        }
+    
+        const hashedPassword = await bcrypt.hash(userData.password, saltRounds);
+        
+        const newUser = this.userRepository.create({
+            ...userData,
+            password: hashedPassword,
+        });
+    
+        return this.userRepository.save(newUser);
+    }
+    
+    private isValidEmail(email: string): boolean {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    } 
 //get user by login
     async getUserByLogin(login: string) {
         const user = await this.userRepository.findOneBy({ login });

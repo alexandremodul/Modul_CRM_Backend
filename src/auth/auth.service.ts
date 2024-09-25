@@ -11,19 +11,21 @@ import {JwtService} from '@nestjs/jwt'
 export class AuthService {
     constructor (private readonly userService: UserService, private jwtService: JwtService){}
 
-    async login(loginDto: LoginDto): Promise<ReturnLogin>  {
-        const user: UserEntity | undefined = await this.userService.getUserByLogin(loginDto.login).catch(() => undefined)
-
-        const isMatch = await compare(loginDto.password, user?.password || '')
-
-        
-
-        if(!user || isMatch){
-            throw new NotFoundException('Dados Invalidos')
+    async login(loginDto: LoginDto): Promise<ReturnLogin> {
+        const user: UserEntity | undefined = await this.userService.getUserByLogin(loginDto.login).catch(() => undefined);
+    
+        if (!user) {
+            throw new NotFoundException('Usuário não encontrado');
         }
-
+    
+        const isMatch = await compare(loginDto.password, user.password);
+    
+        if (!isMatch) {
+            throw new NotFoundException('Dados inválidos');
+        }
+    
         return {
-            accessToken: this.jwtService.sign({ ...new LoginPayload(user) }), // Usando spread para converter em plain object
+            accessToken: this.jwtService.sign({ ...new LoginPayload(user) }),
             user: new CreateUserDto(user),
         };
     }

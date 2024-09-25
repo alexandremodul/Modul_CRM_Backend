@@ -8,7 +8,6 @@ export class CreateUserDto {
     constructor(user: UserEntity) {
         this.name = user.name;
         this.email = user.email;
-        this.password = user.password; // Ou remova se você não quiser expor a senha
     }
 }
 
