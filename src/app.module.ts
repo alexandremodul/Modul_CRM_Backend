@@ -5,9 +5,17 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ProdutosModule } from './produtos/produtos.module';
+import { ProdutosModuleDetalhe } from './produtos_detalhes/produtos_detalhes.module';
+import { ProdutosModuleRevisao } from './produtos_revisao/produtos_revisao.module';
+import { StatusModuleRevisao } from './status_revisao/status_revisao.module';
+import { RoteirosModule } from './roteiros/roteiros.module';
+import { EstruturasModule } from './estruturas/estruturas.module';
 
 @Module({
-  imports: [
+  imports: [   
+    AuthModule,
+    UserModule,
     ConfigModule.forRoot({
       envFilePath: process.env.NODE_ENV !== 'production' 
         ? ['.env.development.local', '.env'] // Fallback para .env se .env.development.local não existir
@@ -36,6 +44,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     }),
     UserModule,
     AuthModule,
+    ProdutosModule,
+    ProdutosModuleDetalhe,
+    ProdutosModuleRevisao,
+    StatusModuleRevisao,
+    RoteirosModule,
+    EstruturasModule
+    
+
   ],
   controllers: [AppController],
   providers: [AppService],
