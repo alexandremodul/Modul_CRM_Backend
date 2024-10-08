@@ -5,6 +5,12 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ProdutosModule } from './produtos/produtos.module';
+import { ProdutosModuleDetalhe } from './produtos_detalhes/produtos_detalhes.module';
+import { ProdutosModuleRevisao } from './produtos_revisao/produtos_revisao.module';
+import { StatusModuleRevisao } from './status_revisao/status_revisao.module';
+import { RoteirosModule } from './roteiros/roteiros.module';
+import { EstruturasModule } from './estruturas/estruturas.module';
 
 @Module({
   imports: [   
@@ -38,6 +44,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     }),
     UserModule,
     AuthModule,
+    ProdutosModule,
+    ProdutosModuleDetalhe,
+    ProdutosModuleRevisao,
+    StatusModuleRevisao,
+    RoteirosModule,
+    EstruturasModule
+    
+
   ],
   controllers: [AppController],
   providers: [AppService],
