@@ -13,7 +13,9 @@ import { RoteirosModule } from './roteiros/roteiros.module';
 import { EstruturasModule } from './estruturas/estruturas.module';
 
 @Module({
-  imports: [
+  imports: [   
+    AuthModule,
+    UserModule,
     ConfigModule.forRoot({
       envFilePath: process.env.NODE_ENV !== 'production' 
         ? ['.env.development.local', '.env'] // Fallback para .env se .env.development.local não existir
