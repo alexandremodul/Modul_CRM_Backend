@@ -7,7 +7,7 @@ export class ProdutosDetalhes1727807118433 implements MigrationInterface {
                 id_codigo integer NOT NULL,
                 codigo character varying NOT NULL,
                 versao_desenho_atual character varying(3) NOT NULL,
-                status_de_revisao integer NOT NULL, -- Altere aqui para ser um inteiro
+                status_de_revisao integer NOT NULL, 
                 created_at timestamp without time zone DEFAULT now() NOT NULL,
                 updated_at timestamp without time zone DEFAULT now() NOT NULL,
                 primary key (id_codigo),
