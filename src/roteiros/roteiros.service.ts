@@ -21,12 +21,13 @@ export class RoteirosService {
     return this.RoteirosRepository.find();
   }
 
-  async findOne(id_roteiro: number): Promise<Roteiros> {
-    const Roteiro = await this.RoteirosRepository.findOneBy({ id_roteiro });
-    if (!Roteiro) {
-      throw new NotFoundException(`Roteiro com id_roteiro ${id_roteiro} não encontrado`);
+  
+  async findByProduto(produto: string | number): Promise<Roteiros[]> {
+    const roteiros = await this.RoteirosRepository.findBy({ produto: produto.toString() });
+    if (roteiros.length === 0) {
+      throw new NotFoundException(`Nenhum roteiro encontrado para o produto ${produto}`);
     }
-    return Roteiro;
+    return roteiros;
   }
 
   async update(id_roteiro: number, UpdateRoteiroDto: UpdateRoteiroDto): Promise<Roteiros> {
@@ -41,7 +42,7 @@ export class RoteirosService {
   }
 
   async remove(id_roteiro: number): Promise<void> {
-    const Roteiro = await this.findOne(id_roteiro);
+    const Roteiro = await this.findByProduto (id_roteiro);
     await this.RoteirosRepository.remove(Roteiro);
   }
 }

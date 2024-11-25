@@ -7,7 +7,8 @@ export class Roteiros1727807125546 implements MigrationInterface {
             CREATE TABLE public.roteiros (
                 id_roteiro integer NOT NULL,
                 produto character varying NOT NULL,
-                operacao_descr character varying NOT NULL,
+                operacao_descr character varying NOT NULL
+                descr character varying NOT NULL,
                 oper_ref_grade character varying NOT NULL,
                 created_at timestamp without time zone DEFAULT now() NOT NULL,
                 updated_at timestamp without time zone DEFAULT now() NOT NULL,
