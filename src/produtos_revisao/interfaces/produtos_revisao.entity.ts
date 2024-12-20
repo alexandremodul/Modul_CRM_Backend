@@ -11,10 +11,10 @@ export class Produtos_revisao {
   @Column({ type: 'varchar', length: 255 })
   versao_desenho: string;
 
-  @Column({ type: 'varchar', length: 255 })
-  status_de_revisao: string;
+  @Column({ type: 'integer' })
+  status_de_revisao: number;
   
-  @Column({ type: 'int',  })
+  @Column({ type: 'int' })
   usuario_revisor: number;
 
   @CreateDateColumn({ type: 'timestamp' })
