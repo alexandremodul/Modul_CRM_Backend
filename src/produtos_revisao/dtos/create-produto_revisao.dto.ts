@@ -11,7 +11,7 @@ export class CreateProdutoRevisaoDto {
 
   @IsString()
   @IsNotEmpty()
-  status_de_revisao: string;
+  status_de_revisao: number;
 
  
   @IsString()

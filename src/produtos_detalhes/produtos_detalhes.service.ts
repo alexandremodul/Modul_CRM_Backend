@@ -17,31 +17,34 @@ export class ProdutosDetalhesService {
     return this.produtosRepository.save(produto);
   }
 
-  async findAll(): Promise<Produto[]> {
-    return this.produtosRepository.find();
-  }
+  // async findAll(): Promise<Produto[]> {
+  //   return this.produtosRepository.find();
+  // }
 
-  async findOne(id_codigo: number): Promise<Produto> {
-    const produto = await this.produtosRepository.findOneBy({ id_codigo });
-    if (!produto) {
-      throw new NotFoundException(`Produto com id_codigo ${id_codigo} não encontrado`);
+  async findAll(codigo: string): Promise<Produto[]> {
+    const produtos = await this.produtosRepository.find({
+        where: { codigo },
+    });
+    if (!produtos || produtos.length === 0) {
+        throw new NotFoundException(`Produto com codigo ${codigo} não encontrado`);
     }
-    return produto;
-  }
+    return produtos;
+}
 
-  async update(id_codigo: number, updateProdutoDto: UpdateProdutoDto): Promise<Produto> {
+
+  async update(codigo: string, updateProdutoDto: UpdateProdutoDto): Promise<Produto> {
     const produto = await this.produtosRepository.preload({
-      id_codigo,
+      codigo,
       ...updateProdutoDto,
     });
     if (!produto) {
-      throw new NotFoundException(`Produto com id_codigo ${id_codigo} não encontrado`);
+      throw new NotFoundException(`Produto com id_codigo ${codigo} não encontrado`);
     }
     return this.produtosRepository.save(produto);
   }
 
-  async remove(id_codigo: number): Promise<void> {
-    const produto = await this.findOne(id_codigo);
+  async remove(codigo: string): Promise<void> {
+    const produto = await this.findAll(codigo);
     await this.produtosRepository.remove(produto);
   }
 }

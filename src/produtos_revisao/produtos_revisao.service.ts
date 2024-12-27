@@ -21,13 +21,15 @@ export class ProdutosRevisaoService {
     return this.produtosRepository.find();
   }
 
-  async findOne(id_codigo: number): Promise<Produtos_revisao> {
-    const produto = await this.produtosRepository.findOneBy({ id_codigo });
-    if (!produto) {
-      throw new NotFoundException(`Produto com id_codigo ${id_codigo} não encontrado`);
+    async findByCodigo(codigo: string): Promise<Produtos_revisao[]> { 
+      const produtos = await this.produtosRepository.find({ where: { codigo } });
+      
+      if (produtos.length === 0) {
+        throw new NotFoundException(`Produto com código ${codigo} não encontrado`);
+      }
+      
+      return produtos;
     }
-    return produto;
-  }
 
   async update(id_codigo: number, UpdateProdutoRevisaoDto: UpdateProdutoRevisaoDto): Promise<Produtos_revisao> {
     const produto = await this.produtosRepository.preload({
@@ -40,8 +42,8 @@ export class ProdutosRevisaoService {
     return this.produtosRepository.save(produto);
   }
 
-  async remove(id_codigo: number): Promise<void> {
-    const produto = await this.findOne(id_codigo);
+  async remove(codigo: string): Promise<void> {
+    const produto = await this.findAll();
     await this.produtosRepository.remove(produto);
   }
 }

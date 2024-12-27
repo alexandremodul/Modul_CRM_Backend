@@ -47,10 +47,14 @@ export class UserService {
 
 
     async getUserById(id: number) {
-        const user = await this.userRepository.findOneBy({ id });
+        const user = await this.userRepository.find({
+            where: { id }, 
+        });
+    
         if (!user) {
-            throw new Error('Não Encontrado');
+            throw new Error('Usuário não encontrado');
         }
+    
         return user;
     }
     async updateUser(id: number, updateUserDto: CreateUserDto) {

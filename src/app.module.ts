@@ -11,6 +11,7 @@ import { ProdutosModuleRevisao } from './produtos_revisao/produtos_revisao.modul
 import { StatusModuleRevisao } from './status_revisao/status_revisao.module';
 import { RoteirosModule } from './roteiros/roteiros.module';
 import { EstruturasModule } from './estruturas/estruturas.module';
+import { OcorrenciaModule } from './ocorrencias/ocorrencia.module';
 
 @Module({
   imports: [   
@@ -49,7 +50,8 @@ import { EstruturasModule } from './estruturas/estruturas.module';
     ProdutosModuleRevisao,
     StatusModuleRevisao,
     RoteirosModule,
-    EstruturasModule
+    EstruturasModule,
+    OcorrenciaModule
     
 
   ],
