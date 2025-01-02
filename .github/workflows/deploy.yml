@@ -51,4 +51,5 @@ jobs:
             export DB_DATABASE=${{ secrets.DB_DATABASE }}
             export JWT_SECRET=${{ secrets.JWT_SECRET }}
             export JWT_EXPIRES_IN=${{ secrets.JWT_EXPIRES_IN }}
-            pm2 restart all
+            JWT_SECRET=${{ secrets.JWT_SECRET }} JWT_EXPIRES_IN=${{ secrets.JWT_EXPIRES_IN }} pm2 restart all
+            
