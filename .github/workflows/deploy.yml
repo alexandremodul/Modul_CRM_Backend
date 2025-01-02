@@ -23,6 +23,8 @@ jobs:
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           DB_PORT: ${{ secrets.DB_PORT }}
           DB_DATABASE: ${{ secrets.DB_DATABASE }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          JWT_EXPIRES_IN: ${{ secrets.JWT_EXPIRES_IN }}
         run: npm run build
 
       - name: Copy files to VPS
@@ -47,4 +49,6 @@ jobs:
             export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
             export DB_PORT=${{ secrets.DB_PORT }}
             export DB_DATABASE=${{ secrets.DB_DATABASE }}
+            export JWT_SECRET: ${{ secrets.JWT_SECRET }}
+            export JWT_EXPIRES_IN: ${{ secrets.JWT_EXPIRES_IN }}
             pm2 restart all
