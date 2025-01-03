@@ -41,6 +41,11 @@ export class RoteirosService {
     return this.RoteirosRepository.save(Roteiro);
   }
 
+
+  async removeAll(): Promise<void> {
+    await this.RoteirosRepository.clear(); // Limpa todos os registros da tabela
+}
+
   async remove(id_roteiro: number): Promise<void> {
     const Roteiro = await this.findByProduto (id_roteiro);
     await this.RoteirosRepository.remove(Roteiro);
