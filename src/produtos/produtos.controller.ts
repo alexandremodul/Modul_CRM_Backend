@@ -33,4 +33,10 @@ export class ProdutosController {
   remove(@Param('id') id: string) {
     return this.produtosService.remove(+id);
   }
+  @UseGuards(JwtAuthGuard)
+  @Delete()
+  removeAll() {
+    return this.produtosService.removeAll();
+  }
+  
 }

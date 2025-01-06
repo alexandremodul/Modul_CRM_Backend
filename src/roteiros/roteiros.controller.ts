@@ -33,4 +33,9 @@ export class RoteirosController {
   remove(@Param('id_roteiro') id_roteiro: string) {
     return this.roteirosService.remove(+id_roteiro);
   }
+
+  @Delete()
+removeAll() {
+    return this.roteirosService.removeAll();
+}
 }

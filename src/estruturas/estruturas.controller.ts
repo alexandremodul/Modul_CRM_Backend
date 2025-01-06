@@ -23,7 +23,7 @@ export class EstruturasController {
   @UseGuards(JwtAuthGuard)
   @Get(':codigo')
   findOne(@Param('codigo') codigo: string) {
-    return this.estruturasService.findOne(codigo);
+    return this.estruturasService.find(codigo);
   }
 
   @UseGuards(JwtAuthGuard)
@@ -36,5 +36,10 @@ export class EstruturasController {
   @Delete(':codigo')
   remove(@Param('codigo') codigo: string) {
     return this.estruturasService.remove(codigo);
+  }
+  @UseGuards(JwtAuthGuard)
+  @Delete()
+  removeAll() {
+    return this.estruturasService.removeAll();
   }
 }
