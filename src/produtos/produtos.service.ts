@@ -44,4 +44,7 @@ export class ProdutosService {
     const produto = await this.findOne(id_codigo);
     await this.produtosRepository.remove(produto);
   }
+  async removeAll(): Promise<void> {
+    await this.produtosRepository.clear(); 
+  }
 }

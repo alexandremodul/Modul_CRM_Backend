@@ -21,10 +21,10 @@ export class EstruturasService {
     return this.EstruturasRepository.find();
   }
 
-  async findOne(codigo: string): Promise<Estruturas> {
-    const Estruturas = await this.EstruturasRepository.findOneBy({ codigo });
-    if (!Estruturas) {
-      throw new NotFoundException(`Estruturas com id_estruturas ${codigo} não encontrado`);
+  async find(codigo: string): Promise<Estruturas[]> {
+    const Estruturas = await this.EstruturasRepository.find({ where: { codigo } });
+    if (Estruturas.length === 0) {
+      throw new NotFoundException(`Nenhuma estrutura encontrada com o código ${codigo}`);
     }
     return Estruturas;
   }
@@ -41,7 +41,11 @@ export class EstruturasService {
   }
 
   async remove(codigo: string): Promise<void> {
-    const Estruturas = await this.findOne(codigo);
+    const Estruturas = await this.find(codigo);
     await this.EstruturasRepository.remove(Estruturas);
+  }
+
+  async removeAll(): Promise<void> {
+    await this.EstruturasRepository.clear(); 
   }
 }

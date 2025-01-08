@@ -30,7 +30,9 @@ export class OcorrenciaService {
     await this.ocorrenciaRepository.update(id, updateOcorrenciaDto);
     return this.findOne(id);  
   }
-
+  async removeAll(): Promise<void> {
+    await this.ocorrenciaRepository.clear(); // Esse comando exclui todos os dados da tabela
+  }
   async remove(id: number): Promise<void> {
     await this.ocorrenciaRepository.delete(id);
   }

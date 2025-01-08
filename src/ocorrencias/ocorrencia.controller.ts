@@ -27,8 +27,14 @@ export class OcorrenciaController {
   update(@Param('id') id: number, @Body() updateOcorrenciaDto: UpdateOcorrenciaDto): Promise<Ocorrencia> {
     return this.ocorrenciaService.update(id, updateOcorrenciaDto);
   }
+  
   @Delete(':id')
   remove(@Param('id') id: number): Promise<void> {
     return this.ocorrenciaService.remove(id);
+  }
+
+  @Delete()
+  removeAll(): Promise<void> {
+    return this.ocorrenciaService.removeAll();
   }
 }
