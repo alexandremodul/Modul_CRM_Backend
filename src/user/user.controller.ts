@@ -17,6 +17,10 @@ export class UserController {
     async getUser(@Param('id') id: number) {
         return this.userService.getUserById(id);
     }
+    @Get()
+    async findAll() {
+        return this.userService.findAll();
+    }
     @Put(':id')
     async updateUser(@Param('id') id: number, @Body() updateUserDto: CreateUserDto) {
         return this.userService.updateUser(id, updateUserDto);

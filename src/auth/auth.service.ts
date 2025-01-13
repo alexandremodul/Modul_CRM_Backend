@@ -17,7 +17,7 @@ export class AuthService {
         if (!user) {
             throw new NotFoundException('Usuário não encontrado');
         }
-    // teste upload
+    
         const isMatch = await compare(loginDto.password, user.password);
     
         if (!isMatch) {
