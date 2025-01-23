@@ -57,16 +57,29 @@ export class UserService {
     
         return user;
     }
-    async updateUser(id: number, updateUserDto: CreateUserDto) {
-        const user = await this.userRepository.findOneBy({ id }); 
+
+
+    async findAll(): Promise<UserEntity[]> {
+        return await this.userRepository.find(); 
+      }
+
+      async updateUser(id: number, updateUserDto: CreateUserDto) {
+        const user = await this.userRepository.findOneBy({ id });
         if (!user) {
-            throw new Error('Não Encontrado');
+            throw new Error('Usuário não encontrado');
         }
-
+    
+        if (updateUserDto.password) {
+            const saltRounds = 10;
+            const hashedPassword = await bcrypt.hash(updateUserDto.password, saltRounds);
+            updateUserDto.password = hashedPassword; 
+        }
+    
         Object.assign(user, updateUserDto);
-
         return this.userRepository.save(user);
     }
+
+
     async deleteUser(id: string) {
         const result = await this.userRepository.delete(id);
         console.log(result)
