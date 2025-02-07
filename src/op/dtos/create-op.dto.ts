@@ -97,4 +97,8 @@ export class CreateOpDto {
   @IsOptional()
   @IsString()
   qtd_segunda_um?: string;
+
+  @IsOptional()
+  @IsString()
+  op?: string;
 }

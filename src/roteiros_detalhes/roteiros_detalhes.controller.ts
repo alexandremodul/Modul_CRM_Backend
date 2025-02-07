@@ -14,7 +14,6 @@ export class RoteirosDetalhesController {
 
   @Get(':produto_id')
   findAll(@Query('produto_id') produto_id: string) {
-  
     return this.roteirosDetalhesService.findAll(produto_id);
   }
 

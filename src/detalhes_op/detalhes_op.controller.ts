@@ -17,14 +17,14 @@ export class DetalhesOpController {
         return this.detalhesOpService.findAll();
     }
 
-    @Get(':id')
-    findOne(@Param('id') id: string) {
-        return this.detalhesOpService.findOne(+id);
+    @Get(':ordem_prod')
+    find(@Param('ordem_prod') ordem_prod: string) {
+        return this.detalhesOpService.find(ordem_prod);
     }
 
-    @Put(':id')
-    update(@Param('id') id: string, @Body() updateDetalhesOpDto: UpdateDetalhesOpDto) {
-        return this.detalhesOpService.update(+id, updateDetalhesOpDto);
+    @Put(':ordem_prod')
+    update(@Param('ordem_prod') ordem_prod: string, @Body() updateDetalhesOpDto: UpdateDetalhesOpDto) {
+        return this.detalhesOpService.update(ordem_prod, updateDetalhesOpDto);
     }
 
     @Delete(':id')

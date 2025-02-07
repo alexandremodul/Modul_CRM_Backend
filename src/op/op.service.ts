@@ -23,8 +23,8 @@ export class OpService {
   // async findOne(id: number): Promise<Op> {
   //   return this.opRepository.findOneBy({ id: id });
   // }
-  async findAllByNumeroOp(numero_op: string): Promise<Op[]> {
-    return this.opRepository.find({ where: { numero_op } });
+  async findAllByNumeroOp(op: string): Promise<Op[]> {
+    return this.opRepository.find({ where: { op } });
   }
   
   // async update(id: number, updateOpDto: UpdateOpDto): Promise<Op> {

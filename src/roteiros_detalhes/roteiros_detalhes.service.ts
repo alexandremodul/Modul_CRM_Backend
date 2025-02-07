@@ -13,6 +13,18 @@ export class RoteiroDetalhesService {
   ) {}
 
   async create(createRoteirosDetalhesDto: CreateRoteirosDetalhesDto): Promise<Roteiros_detalhes> {
+    const existingRoteiroDetalhes = await this.roteirosDetalhesRepository.findOne({
+      where: {
+        produto_id: createRoteirosDetalhesDto.produto_id,
+        operacao_descr: createRoteirosDetalhesDto.operacao_descr,
+      },
+    });
+
+    if (existingRoteiroDetalhes) {
+      existingRoteiroDetalhes.tempo = createRoteirosDetalhesDto.tempo;
+      return this.roteirosDetalhesRepository.save(existingRoteiroDetalhes);
+    }
+
     const newRoteiroDetalhes = this.roteirosDetalhesRepository.create(createRoteirosDetalhesDto);
     return this.roteirosDetalhesRepository.save(newRoteiroDetalhes);
   }

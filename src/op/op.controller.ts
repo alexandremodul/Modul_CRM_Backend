@@ -23,9 +23,9 @@ export class OpController {
   //   return this.opService.findOne(id);
   // }
 
-  @Get(':numero_op')
-  findAllByNumeroOp(@Param('numero_op') numero_op: string): Promise<Op[]> {
-    return this.opService.findAllByNumeroOp(numero_op);
+  @Get(':op')
+  findAllByNumeroOp(@Param('op') op: string): Promise<Op[]> {
+    return this.opService.findAllByNumeroOp(op);
   }
 
   // @Put(':id')

@@ -12,7 +12,19 @@ export class DetalhesOpService {
         private readonly detalhesOpRepository: Repository<DetalhesOp>,
     ) {}
 
-    create(createDetalhesOpDto: CreateDetalhesOpDto) {
+    async create(createDetalhesOpDto: CreateDetalhesOpDto) {
+        const existingDetalhesOp = await this.detalhesOpRepository.findOne({
+            where: {
+                ordem_prod: createDetalhesOpDto.ordem_prod,
+                desc_oper: createDetalhesOpDto.desc_oper,
+            },
+        });
+
+        if (existingDetalhesOp && existingDetalhesOp.dt_planejada !== createDetalhesOpDto.dt_planejada) {
+            existingDetalhesOp.dt_planejada = createDetalhesOpDto.dt_planejada;
+            return this.detalhesOpRepository.save(existingDetalhesOp);
+        }
+
         const detalhesOp = this.detalhesOpRepository.create(createDetalhesOpDto);
         return this.detalhesOpRepository.save(detalhesOp);
     }
@@ -21,13 +33,13 @@ export class DetalhesOpService {
         return this.detalhesOpRepository.find();
     }
 
-    findOne(id: number) {
-        return this.detalhesOpRepository.findOne({ where: { id } });
+    find(ordem_prod: string) {
+        return this.detalhesOpRepository.find({ where: { ordem_prod } });
     }
 
-    async update(id: number, updateDetalhesOpDto: UpdateDetalhesOpDto) {
-        await this.detalhesOpRepository.update(id, updateDetalhesOpDto);
-        return this.findOne(id);
+    async update(ordem_prod: string, updateDetalhesOpDto: UpdateDetalhesOpDto) {
+        await this.detalhesOpRepository.update(ordem_prod, updateDetalhesOpDto);
+        return this.find(ordem_prod);
     }
 
     remove(id: number) {

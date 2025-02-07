@@ -77,6 +77,8 @@ export class Op {
 
   @Column({ type: 'text', nullable: true })
   qtd_segunda_um?: string;
+  @Column({ type: 'text', nullable: true })
+  op?: string;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;
