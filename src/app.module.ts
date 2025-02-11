@@ -12,6 +12,11 @@ import { StatusModuleRevisao } from './status_revisao/status_revisao.module';
 import { RoteirosModule } from './roteiros/roteiros.module';
 import { EstruturasModule } from './estruturas/estruturas.module';
 import { OcorrenciaModule } from './ocorrencias/ocorrencia.module';
+import { RoteirosDetalhesModule } from './roteiros_detalhes/roteiros_detalhes.module';
+import { OrdensProducaoModule } from './ordens_producao/ordens-producao.module';
+import { OpModule } from './op/op.module';
+import { SaldoEstoqueModule } from './saldoEstoque/saldo_estoque.module';
+import { DetalhesOpModule } from './detalhes_op/detalhes_op.module';
 
 @Module({
   imports: [   
@@ -51,8 +56,12 @@ import { OcorrenciaModule } from './ocorrencias/ocorrencia.module';
     StatusModuleRevisao,
     RoteirosModule,
     EstruturasModule,
-    OcorrenciaModule
-    
+    OcorrenciaModule,
+    RoteirosDetalhesModule,
+    OrdensProducaoModule,
+    OpModule,
+    SaldoEstoqueModule,
+    DetalhesOpModule
 
   ],
   controllers: [AppController],
