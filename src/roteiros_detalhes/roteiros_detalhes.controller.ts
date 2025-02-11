@@ -13,7 +13,7 @@ export class RoteirosDetalhesController {
   }
 
   @Get(':produto_id')
-  findAll(@Query('produto_id') produto_id: string) {
+  findAll(@Param('produto_id') produto_id: string) { // Change @Query to @Param
     return this.roteirosDetalhesService.findAll(produto_id);
   }
 
