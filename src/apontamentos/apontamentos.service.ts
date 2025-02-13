@@ -13,18 +13,6 @@ export class ApontamentosService {
   ) {}
 
   async create(createApontamentosDto: CreateApontamentosDto): Promise<Apontamentos> {
-    const existingApontamento = await this.apontamentosRepository.findOne({
-      where: {
-        ordem_producao: createApontamentosDto.ordem_producao,
-        desc_oper: createApontamentosDto.desc_oper,
-      },
-    });
-
-    if (existingApontamento) {
-      existingApontamento.qtde = createApontamentosDto.qtde;
-      return this.apontamentosRepository.save(existingApontamento);
-    }
-
     const apontamento = this.apontamentosRepository.create(createApontamentosDto);
     return this.apontamentosRepository.save(apontamento);
   }
