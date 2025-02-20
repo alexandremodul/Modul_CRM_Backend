@@ -13,7 +13,7 @@ export class ApontamentosService {
   ) {}
 
   async create(createApontamentosDto: CreateApontamentosDto): Promise<Apontamentos> {
-    const apontamento = this.apontamentosRepository.create(createApontamentosDto);
+      const apontamento = this.apontamentosRepository.create(createApontamentosDto);
     return this.apontamentosRepository.save(apontamento);
   }
 
