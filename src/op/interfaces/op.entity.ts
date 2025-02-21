@@ -13,7 +13,7 @@ export class Op {
   numero_op: string;
 
   @Column()
-  item: string;
+  item: number;
 
   @Column()
   sequencia: string;

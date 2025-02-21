@@ -10,9 +10,9 @@ export class CreateOpDto {
   @IsNotEmpty()
   numero_op: string;
 
-  @IsString()
+  // @IsString()
   @IsNotEmpty()
-  item: string;
+  item: number;
 
   @IsString()
   @IsNotEmpty()
