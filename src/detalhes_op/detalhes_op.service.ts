@@ -40,8 +40,19 @@ export class DetalhesOpService {
     async update(ordem_prod: string, updateDetalhesOpDto: UpdateDetalhesOpDto) {
         await this.detalhesOpRepository.update(ordem_prod, updateDetalhesOpDto);
         return this.find(ordem_prod);
-    }
+    }                                                                                                                 
+    async updateData(ordem_prod: string, desc_oper: string, dt_planejada: string) {
+            const detalhe = await this.detalhesOpRepository.findOne({
+                where: { ordem_prod, desc_oper },
+            });
 
+            if (!detalhe) {
+                throw new Error(`Detalhe com ordem_prod ${ordem_prod} e desc_oper ${desc_oper} não encontrado`);
+            }
+
+            detalhe.dt_planejada = dt_planejada;
+            return this.detalhesOpRepository.save(detalhe);
+        }
     remove(id: number) {
         return this.detalhesOpRepository.delete(id);
     }
