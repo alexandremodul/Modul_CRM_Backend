@@ -21,6 +21,12 @@ export class DetalhesOp {
     @IsNotEmpty()
     dt_planejada: string;
 
+    
+    @Column()
+    @IsString()
+    @IsNotEmpty()
+    status: string;
+
     @CreateDateColumn({ type: 'timestamp' })
     created_at: Date;
 

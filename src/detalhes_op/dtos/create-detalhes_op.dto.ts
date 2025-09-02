@@ -12,4 +12,8 @@ export class CreateDetalhesOpDto {
     @IsString()
     @IsNotEmpty()
     dt_planejada: string;
+
+    @IsString()
+    @IsNotEmpty()
+    status: string;
 }
