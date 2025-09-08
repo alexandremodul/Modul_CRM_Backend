@@ -1,9 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Patch, Post, Body, Param } from '@nestjs/common';
 import { DetalhesOrdemProducaoService } from './detalhes_ordem_producao.service';
 import { CreateDetalhesOrdemProducaoDto } from './dtos/create-detalhes-ordem-producao.dto';
 import { UpdateDetalhesOrdemProducaoDto } from './dtos/update-detalhes-ordem-producao.dto';
 
-@Controller('detalhes-ordem-producao')
+@Controller('detalhes_ordem_producao') // <<<<<< usa underline, igual ao seu frontend
 export class DetalhesOrdemProducaoController {
   constructor(private readonly service: DetalhesOrdemProducaoService) {}
 
@@ -17,18 +17,16 @@ export class DetalhesOrdemProducaoController {
     return this.service.findAll();
   }
 
-  @Get(':op')
+  @Get('op/:op')
   findAllByOp(@Param('op') op: string) {
     return this.service.findAllByOp(op);
   }
 
-  @Patch(':op')
-  updateByOp(@Param('op') op: string, @Body() dto: UpdateDetalhesOrdemProducaoDto) {
+  @Patch('op/:op') // <<<<<< rota que faltava
+  updateByOp(
+    @Param('op') op: string,
+    @Body() dto: UpdateDetalhesOrdemProducaoDto,
+  ) {
     return this.service.updateByOp(op, dto);
-  }
-
-  @Delete(':op')
-  removeByOp(@Param('op') op: string) {
-    return this.service.removeByOp(op);
   }
 }
