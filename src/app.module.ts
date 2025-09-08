@@ -18,6 +18,9 @@ import { OpModule } from './op/op.module';
 import { SaldoEstoqueModule } from './saldoEstoque/saldo_estoque.module';
 import { DetalhesOpModule } from './detalhes_op/detalhes_op.module';
 import { ApontamentosModule } from './apontamentos/apontamentos.module';
+import { ApontamentosTempoModule } from './apontamentosTempo/apontamentosTempo.module';
+import { DetalhesOrdemProducaoModule } from './detalhes_ordem_producao/detalhes_ordem_producao.module';
+
 
 @Module({
   imports: [   
@@ -63,7 +66,9 @@ import { ApontamentosModule } from './apontamentos/apontamentos.module';
     OpModule,
     SaldoEstoqueModule,
     DetalhesOpModule,
-    ApontamentosModule
+    ApontamentosModule,
+    ApontamentosTempoModule,
+    DetalhesOrdemProducaoModule
 
   ],
   controllers: [AppController],
