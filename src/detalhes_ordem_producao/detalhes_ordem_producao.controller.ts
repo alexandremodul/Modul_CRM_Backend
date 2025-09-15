@@ -22,7 +22,7 @@ export class DetalhesOrdemProducaoController {
     return this.service.findAllByOp(op);
   }
 
-  @Patch('op/:op') // <<<<<< rota que faltava
+  @Patch('op/:op')
   updateByOp(
     @Param('op') op: string,
     @Body() dto: UpdateDetalhesOrdemProducaoDto,
